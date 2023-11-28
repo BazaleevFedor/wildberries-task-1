@@ -50,13 +50,15 @@ export const stringToJson = (string) => {
     if (string[0] === '[') {
         return commaSplit(string.slice(1, -1)).reduce((acc, elem, index) => {
             acc.push(stringToJson(elem));
+            return acc;
         }, []);
     } else if (string[0] === '{') {
         return commaSplit(string.slice(1, -1)).reduce((acc, elem, index) => {
             const dotsIndex = elem.indexOf(':');
-            const key = elem.slice(0, dotsIndex);
+            const key = elem.slice(1, dotsIndex-1);
             const value = elem.slice(dotsIndex+1);
             acc[key] = stringToJson(value);
+            return acc;
         }, {});
     } else {
         const numericValue = parseFloat(string);
