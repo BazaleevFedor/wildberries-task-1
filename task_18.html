@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1 style="text-align: center;" id="js-counter"></h1>
+    <script type="module" src="task_18.js"></script>
+    <script type="module">
+        import {testLocalStorageSize} from './task_18.js'
+
+        const counter = document.getElementById('js-counter');
+
+        let {size} = testLocalStorageSize();
+
+        if (size > 5000000) {  // если итоговый размер больше 5 мбайт, указываем в мегабайтах
+            counter.innerText = (size / (1024 * 1024)).toFixed(2) + ' мбайт';  // записываем размер в элемент браузера
+        } else {
+            counter.innerText = (size / (1024)).toFixed(2) + ' кбайт'; // иначе в килобайтах
+        }
+    </script>
+</body>
+</html>

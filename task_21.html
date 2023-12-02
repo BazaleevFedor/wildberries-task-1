@@ -1,0 +1,31 @@
+<!--
+    Вычислить размер коллстэка в основных браузерах: Chrome, Firefox, Opera и Safari (если есть возможность).
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        const getCallStackSize = () => {
+            let count = 0;
+
+            const recursiveCall = () => {
+                count++;
+                recursiveCall();
+            }
+
+            try {
+                recursiveCall();
+            } catch (_) {
+                return  count;
+            }
+        }
+
+        console.log('call stack size: ', getCallStackSize());
+    </script>
+</body>
+</html>

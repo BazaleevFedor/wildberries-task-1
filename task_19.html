@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .widget {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+
+            width: 500px;
+            height: 600px;
+
+            background: #FFFFFF;
+            border-radius: 12px 0 0 0;
+
+            overflow-y: auto;
+        }
+
+        .group {
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            gap: 8px;
+
+            padding: 20px;
+            height: max-content;
+        }
+
+        .post {
+            padding: 0 20px 20px 20px;
+
+            display: grid;
+            gap: 8px;
+        }
+
+        .attachments {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .attachments img {
+            border-radius: 12px;
+            flex-basis: 0;
+            flex-grow: 1;
+            margin: 4px;
+            max-height: 150px;
+            max-width: 100%;
+            min-height: 100px;
+            min-width: 100px;
+            object-fit: cover;
+            overflow: hidden;
+        }
+
+        .line {
+            height: 1px;
+            background: rgb(211, 195, 207);
+        }
+    </style>
+</head>
+<body style="height: 100%; margin: 0">
+    <main style="height: 100%; position: relative; background: rgb(242, 243, 245)">
+        <div class="widget">
+            <div class="group">
+                <img class="group__avatar" style="width: 40px; height: 40px" id="js-avatar" alt="group icon">
+                <div class="group__title" style="display: grid; margin-top: auto; margin-bottom: auto" id="js-title"> Группа </div>
+            </div>
+            <div class="post-area" id="js-post-area"></div>
+        </div>
+    </main>
+    <script type="module" src="task_19.js"></script>
+</body>
+</html>

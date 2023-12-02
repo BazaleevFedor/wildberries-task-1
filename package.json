@@ -19,6 +19,7 @@
   "dependencies": {
     "@jest/globals": "^29.7.0",
     "expect": "^29.7.0",
-    "moment": "^2.29.4"
+    "moment": "^2.29.4",
+    "object-sizeof": "^2.6.3"
   }
 }
