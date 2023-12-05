@@ -15,12 +15,3 @@ export const callFuncArray = async (funcArray) => {  // т.к. передава�
         console.log(i + 1);  // выводим порядковый номер ф-и
     }
 }
-
-callFuncArray([
-    () => new Promise((resolve) => setTimeout(() => {console.log('foo_01'); resolve()}, 200)),
-    () => new Promise((resolve) => setTimeout(() => {console.log('foo_02'); resolve()}, 1000)),
-    () => new Promise((resolve) => setTimeout(() => {console.log('foo_03'); resolve()}, 12)),
-    () => new Promise((resolve) => setTimeout(() => {console.log('foo_04'); resolve()}, 5000)),
-    () => new Promise((resolve) => setTimeout(() => {console.log('foo_05'); resolve()}, 200)),
-]);
-

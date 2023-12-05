@@ -1,0 +1,30 @@
+<!--
+    Задача: Создать и добавить стиль для элемента: Напишите функцию, которая создает новый элемент, добавляет
+    его в DOM и устанавливает для него стиль с помощью CSS.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * Функция создает новый объект и задает стили для этого объекта.
+     * @param tag - тег создаваемого объекта
+     * @param styles - объект со стилями
+     */
+    const createElem = (tag, styles) => {
+        const newElem = document.createElement(tag);  // создаем объект
+
+        Object.assign(newElem.style, styles);  // перебираем объект со стилями и устанавливаем их для нового элемента
+
+        document.body.appendChild(newElem);  // добавляем элемент в DOM
+    }
+
+    createElem('div', {height: '100px', width: '100px', background: '#000000'});  // вызываем функцию
+</script>
+</body>
+</html>

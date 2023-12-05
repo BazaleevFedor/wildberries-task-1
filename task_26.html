@@ -1,0 +1,44 @@
+<!--
+    Задача: Рекурсивный обход дерева DOM:: Напишите функцию, которая рекурсивно обходит дерево DOM, начиная с указанного
+    элемента, и выполняет определенное действие с каждым узлом (например, выводить информацию о теге в консоль).
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="main">
+    <div class="header"></div>
+    <div class="main-content">
+        <div class="title"></div>
+        <div class="post-area">
+            <div class="post-item"></div>
+            <div class="post-item"></div>
+            <div class="post-item"></div>
+        </div>
+    </div>
+    <div class="sidebar"></div>
+</div>
+<script>
+    /**
+     * Функция обходит дерево DOM с заданного элемента и вызывает на каждый переданное действие.
+     * @param elem - заданный элемент
+     * @param action - действие
+     */
+    const treeBypass = (elem, action) => {
+        action(elem);  // вызываем действие для текущего узла
+
+        Array.from(elem.children).forEach((child) => {
+            treeBypass(child, action);  // рекурсивно вызываем treeBypass для дочерних элементов
+        });
+    }
+
+    treeBypass(document.querySelector('.main'), (elem) => {
+        console.log(elem?.classList[0])
+    });
+</script>
+</body>
+</html>

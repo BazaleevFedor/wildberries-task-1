@@ -1,5 +1,20 @@
 <!--
     Вычислить размер коллстэка в основных браузерах: Chrome, Firefox, Opera и Safari (если есть возможность).
+
+    Решение основывалось на статье https://habr.com/ru/articles/550534/
+
+    Opera: call stack size: 1.007Мбайт
+    Chrome: call stack size: 1.005Мбайт
+
+    Firefox:
+        call stack size: 0.845Мбайт
+        call stack size: 21.591Мбайт
+        call stack size: -33.724Мбайт
+        call stack size: -15.507Мбайт
+        call stack size: 203.563Мбайт
+
+    Примерный размер стека - 1 Мбайт, но в Firefox не получилось определить его таким способом. Возможно, в данном
+    браузере по другому обрабатывается переполнение стека.
 -->
 
 <!DOCTYPE html>
@@ -9,23 +24,69 @@
     <title>Title</title>
 </head>
 <body>
-    <script>
-        const getCallStackSize = () => {
-            let count = 0;
+    <h1 style="width: 100%; text-align: center"></h1>
+    <script type="module">
+        let callsCountSecond = 0;
+        let callsCountFirst = 0;
 
-            const recursiveCall = () => {
-                count++;
-                recursiveCall();
-            }
-
-            try {
-                recursiveCall();
-            } catch (_) {
-                return  count;
-            }
+        // Рекурсивный вызов ф-и без использования переменных. Вычисляем кол-во вызовов до переполнения стека
+        const recursiveFirstTest = () => {
+            callsCountFirst++;
+            recursiveFirstTest();
         }
 
-        console.log('call stack size: ', getCallStackSize());
+        try {
+            recursiveFirstTest();
+        } catch (_) {}
+
+        // Рекурсивный вызов ф-и с использованием 10 переменных. Вычисляем кол-во вызовов до переполнения стека
+        const recursiveSecondTest = () => {
+            const a = callsCountSecond + 1;
+            const b = a + 1;
+            const c = b + 1;
+            const d = c + 1;
+            const e = d + 1;
+            const f = e + 1;
+            const g = f + 1;
+            const h = g + 1;
+            const j = h + 1;
+            const k = j + 1;
+            callsCountSecond++;
+            recursiveSecondTest();
+        }
+
+        try {
+            recursiveSecondTest();
+        } catch (_) {}
+
+        // на каждый вызов функции создается контекст вызова функции, в котором кроме информации о функции
+        // содержатся все переменные, которые мы объявили внутри функции.
+
+        // отсюда можем получить формулу для размера, необходимого одному вызову
+        // F_size = Context_size + Variables_count * Variable_size
+        // и формулу для размера стека
+        // CallStack_size = F_size * F_count
+
+        // для первого теста:
+        //  F_size = Context_size
+        //  CallStack_size = Context_size * callsCountFirst
+
+        // для второго теста:
+        //  F_size = Context_size + 10 * variableSize
+        //  CallStack_size = (Context_size + 10 * variableSize) * callsCountSecond
+
+        // решаем уравнение приравнивая CallStack_size.
+        // Context_size * callsCountFirst = (Context_size + 10 * variableSize) * callsCountSecond
+
+        let variableSize = 8;  // в js переменные типы number занимают 8 байт
+
+        // выносим Context_size
+        const Context_size = (10 * variableSize * callsCountSecond) / (callsCountFirst - callsCountSecond);
+
+        // подставляем Context_size в уравнение для первого теста - CallStack_size = Context_size * callsCountFirst
+        const CallStack_size = Context_size * callsCountFirst;
+
+        document.querySelector('h1').innerText = 'call stack size: ' + (CallStack_size / 1000000).toFixed(3) + 'Мбайт';
     </script>
 </body>
 </html>

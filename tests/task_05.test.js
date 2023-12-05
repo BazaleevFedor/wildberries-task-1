@@ -22,8 +22,4 @@ describe('Проверка конвертации JSON в список', () => {
     test('пустой объект', async () => {
         expect(null).toEqual(jsonToLinkedList(JSON.stringify([])));
     });
-
-    test('еще тестов надааааа', async () => {
-        expect('еще тестов надааааа').toEqual(jsonToLinkedList(JSON.stringify([])));
-    });
 });

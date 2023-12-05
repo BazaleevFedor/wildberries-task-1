@@ -28,6 +28,5 @@ describe('Конвертация JSON в строку', () => {
 
     test.each(testData)('Тест для объекта "%s"', ({ input}) => {
         expect(JSON.stringify(input)).toEqual(jsonToString(input));
-        console.log(JSON.stringify(input))
     });
 });

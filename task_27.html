@@ -1,0 +1,68 @@
+<!--
+    Задача: Добавить анимацию для элемента: Напишите функцию, которая добавляет анимацию для элемента на веб-странице,
+    например, плавное изменение его положения или размера.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="js-color">Click me</div>
+<div id="js-move">Click me</div>
+<script>
+    const addAnimation = (elem, className, animation) => {
+        // Создаем стиль с заданной анимацией
+        const style = document.createElement('style');
+        style.textContent = animation;
+
+        // Добавляем стиль в head
+        document.head.appendChild(style);
+
+        // Добавляем класс с анимацией к элементу
+        elem.classList.add(className);
+    };
+
+    const colorElement = document.getElementById('js-color');
+    const moveElement = document.getElementById('js-move');
+
+    // пример использования: добавление анимации при клике
+    colorElement.addEventListener('click', () => {
+        addAnimation(colorElement, 'color-animation',
+            `@keyframes color-animation {
+                from {
+                    background-color: red;
+                }
+                to {
+                    background-color: blue;
+                }
+            }
+
+            .color-animation {
+                animation: color-animation 2s infinite alternate;
+            }`
+        );
+    });
+
+    moveElement.addEventListener('click', () => {
+        addAnimation(moveElement, 'move-animation',
+            `@keyframes move-animation {
+                from {
+                    transform: translateX(0);
+                }
+                to {
+                    transform: translateX(100%);
+                }
+            }
+
+            .move-animation {
+                animation: move-animation 1s infinite alternate;
+            }`
+        );
+    });
+</script>
+</body>
+</html>
+

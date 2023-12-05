@@ -148,16 +148,3 @@ export const stringToJson = (string) => {
         }
     }
 }
-
-let str = 'true';
-try {
-    console.log(JSON.parse(str))
-} catch (e) {
-    console.log(e);
-}
-
-try {
-    console.log(stringToJson(str))
-} catch (e) {
-    console.log(e);
-}

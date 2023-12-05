@@ -1,0 +1,32 @@
+<!--
+    Посчитайте сколько раз можно вызвать функцию document.write() внутри document.write(). Объясните результат.
+
+    Opera: 21 раз
+    Chrome: 21 раз
+    Firefox: 21 раз
+
+    Кол-во рекурсивных вызовов ограничено, чтобы обезопасить браузер от зависаний, нежелательного поведения и др.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  let count = 0;  // создаем счетчик
+  const recursiveWrite = () => {
+    count++;  // увеличиваем счетчик
+    document.write(`<script>recursiveWrite()<\/script>`);  // рекурсивно вызываем recursiveWrite
+  }
+
+  recursiveWrite();  // вызываем рекурсивную функцию
+  console.log(count - 1);
+</script>
+</body>
+</html>
+
+
+

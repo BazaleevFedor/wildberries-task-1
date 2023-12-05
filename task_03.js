@@ -52,10 +52,10 @@ export const MyMath = () => {
          * @return {number[]} - ряд чисел Фибоначчи до числа N
          */
         fibonacciBeforeN (N) {
-            let res = N > 1 ? [1, 1] : [1];  // задаем начальные данные результирующего массива
+            let res = N >= 2 ? [1, 1] : [];  // задаем начальные данные результирующего массива
 
             let fib1 = 1, fib2 = 1;
-            for (let i = 2; i < N; i++) {  // проходим в цикле до нужного числа
+            for (let i = 2; fib2 + fib1 < N; i++) {  // проходим в цикле до нужного числа
                 const tmp = fib1;
                 fib1 = fib2;
                 fib2 += tmp;
@@ -63,19 +63,6 @@ export const MyMath = () => {
             }
 
             return res;
-        },
-
-        /**
-         * Вычисление всех чисел в ряду Фибоначчи до числа N с помощью рекурсии
-         * @param N - номер необходимого числа Фибоначчи
-         * @return {number[]} - ряд чисел Фибоначчи до числа N
-         */
-        fibonacciBeforeNRecursive (N) {
-            if (N === 1 || N === 2) {
-                return N === 1 ? [1] : [1, 1];  // завершаем рекурсивные вызовы, если N <= 2
-            } else {  // иначе возвращаем массив из чисел Фибоначчи до текущего числа и текущее число.
-                return [...this.fibonacciBeforeNRecursive(N - 1), this.fibonacciRecursive(N - 2) + this.fibonacciRecursive(N - 1)];
-            }
         },
 
         /**
@@ -122,7 +109,7 @@ export const MyMath = () => {
         primeBeforeN(N) {
             let prime = [];
 
-            for (let i = 2; i <= N; i++) {  // проходим по всем числам до N
+            for (let i = 2; i < N; i++) {  // проходим по всем числам до N
                 if (this._isPrime(i)) prime.push(i);  // добавляем в результирующий массив только простые числа
             }
 
@@ -135,12 +122,12 @@ export const MyMath = () => {
          * @return {number[]} - массив простых чисел
          */
         primeEratosthenesBeforeN(N) {
-            let isPrime = Array(N + 1).fill(true);  // создаем массив из N элементов, заполненный true
+            let isPrime = Array(N).fill(true);  // создаем массив из N элементов, заполненный true
             isPrime[0] = false; isPrime[1] = false;  // 0 и 1 не простые, сразу отмечаем false
 
             for (let i = 2; i * i <= N; i++) {  // в цикле от 2 до sqrt(N)
                 if (isPrime[i]) { // если число отмечено простым проходим по всему массиву с шагом в это число и отмечаем false (т.к. при умножении этого числа на любое другое получится непростое число)
-                    for (let j = i * i; j <= N; j += i) isPrime[j] = false;
+                    for (let j = i * i; j < N; j += i) isPrime[j] = false;
                 }
             }
 

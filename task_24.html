@@ -1,0 +1,96 @@
+<!--
+    Разработайте страницу, отображающую таблицу с данными. Данные необходимо подгружать из этого источника.
+    http://www.filltext.com/?rows=1000&fname=%7BfirstName%7D&lname=%7BlastName%7D&tel=%7Bphone%7Cformat%7D&address=%7BstreetAddress%7D&city=%7Bcity%7D&state=%7BusState%7Cabbr%7D&zip=%7Bzip%7D&pretty=true
+
+    Требования:
+       * данные должны загружаться при загрузке страницы
+       * необходимо реализовать сортировку по убыванию и по возрастания для всех колонок
+       * необходимо реализовать клиентскую пагинацию (50 элементов на странице)
+-->
+
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .paginator {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+            padding: 20px 20px 0 20px;
+            height: max-content;
+        }
+
+        .paginator-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: #007bff;
+            background: #FFFFFF;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #dee2e6;
+
+            cursor: pointer;
+        }
+
+        .br-left {
+            border-radius: 12px 0 0 12px;
+        }
+
+        .br-right {
+            border-radius: 0 12px 12px 0;
+        }
+
+        .disable {
+            color: #6c757d;
+            cursor: auto;
+        }
+
+        .table {
+            margin-right: auto;
+            margin-left: auto;
+            padding-bottom: 30px;
+            padding-top: 30px;
+
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        .table th, .table td {
+            border: 1px solid #dddddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f2f2f2;
+        }
+
+        .table th button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+
+        .table th button:hover {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body style="height: 100%; margin: 0">
+<main style="height: 100%; display: grid">
+    <div class="paginator"></div>
+    <div class="table">
+
+    </div>
+</main>
+<script type="module" src="task_24.js"></script>
+</body>
+</html>

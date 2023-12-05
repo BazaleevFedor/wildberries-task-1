@@ -1,0 +1,73 @@
+<!--
+    Задача: Создать и добавить элемент с использованием шаблонов: Напишите функцию, которая создает новый элемент
+    с использованием шаблонов (например, с помощью тега <template>) и добавляет его в DOM.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<h3>База слитых почт из 29 задания</h3>
+<table id="table" style="text-align: left; width: 100%">
+    <thead>
+    <tr>
+        <td>Имя</td>
+        <td>Почта</td>
+    </tr>
+    </thead>
+    <tbody id="js-tbody">
+        <!-- данные будут вставлены сюда -->
+    </tbody>
+</table>
+
+<template id="js-row">
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+</template>
+
+<script>
+    /**
+     * Функция добавляет почту пользователя в таблицу.
+     * @param parent - родитель, куда добавлять шаблон
+     * @param template - шаблон
+     * @param name - имя владельца почты
+     * @param email - почта
+     */
+    function addEmailRecord(parent, template, {name, email}) {
+        const templateContent = template.content;  // получаем содержимое шаблона
+
+        // создаем копию содержимого шаблона
+        const templateClone = document.importNode(templateContent, true);
+        templateClone.querySelectorAll('td')[0].textContent = name;  // задаем данные полям шаблона
+        templateClone.querySelectorAll('td')[1].textContent = email;
+
+        parent.appendChild(templateClone);  // добавляем копию в DOM
+    }
+
+
+
+    // пример использования.
+    let stolenMail;  // получаем список почт из localStorage
+    if (localStorage.hasOwnProperty('email')) {
+        stolenMail = JSON.parse(localStorage.getItem('email'));
+    } else {
+        stolenMail = [{name: 'Fedor', email: 'bazaleevf@gmail.com'}, {name: 'Ivan', email: 'russki@ivan.ru'}];
+        localStorage.setItem('email', JSON.stringify(stolenMail));
+    }
+
+    // вызываем отрисовку с помощью шаблона для каждой записи таблицы
+    stolenMail.forEach((item) => addEmailRecord(document.getElementById('js-tbody'), document.getElementById('js-row'), item));
+</script>
+</body>
+</html>
+

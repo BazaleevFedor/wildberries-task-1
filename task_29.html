@@ -1,0 +1,54 @@
+<!--
+    Задача: Взаимодействие с формами: Напишите функцию, которая получает данные из формы на веб-странице и выполняет
+    определенные действия с этими данными, например, отправляет их на сервер или отображает всплывающее окно с результатами.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form id="js-form">
+    <label for="name">Имя:</label>
+    <input type="text" id="name" name="name">
+
+    <label for="email">Почта:</label>
+    <input type="email" id="email" name="email">
+
+    <button type="button" onclick="getFormData('js-form', stealMail)">Отправить</button>
+</form>
+<script>
+    /**
+     * Функция, получающая данные по id формы и выполняющая с ними действие
+     * @param formId - id формы
+     * @param action - действие с данными
+     */
+    const getFormData = (formId, action) => {
+        const form = document.getElementById(formId);
+
+        // получаем данные из полей формы
+        const name = form.elements['name'].value;
+        const email = form.elements['email'].value;
+
+        // Выполняем определенные действия с полученными данными
+        action(name, email)
+    }
+
+    const stealMail = (name, email) => {
+        let stolenMail;
+        if (localStorage.hasOwnProperty('email')) {
+            stolenMail = JSON.parse(localStorage.getItem('email'));
+        } else {
+            stolenMail = [{name: 'Fedor', email: 'bazaleevf@gmail.com'}, {name: 'Ivan', email: 'russki@ivan.ru'}];
+        }
+
+        stolenMail.push({name: name, email: email});
+        localStorage.setItem('email', JSON.stringify(stolenMail));
+
+        alert(`${name}, почта ${email} сохранена в базу спама. бугагагагага`)
+    }
+</script>
+</body>
+</html>
