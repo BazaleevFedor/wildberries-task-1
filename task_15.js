@@ -12,6 +12,8 @@ const callAsyncFunc = async (...functions) => {
     return await Promise.all(functions.map(func => func()));  // ждем выполнения всех промисов. с помощью map заменяем все ф-и на результат их выполнения.
 }
 
+
+// пример использования
 const getUserInfo = async () => {
     return new Promise(resolve => setTimeout(() => resolve({userName: 'Fedor', isAuthorized: true}), 50));  // ф-я возвращает данные через 50 мс после вызова
 }
